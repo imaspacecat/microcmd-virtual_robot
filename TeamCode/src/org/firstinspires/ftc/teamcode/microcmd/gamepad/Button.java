@@ -15,14 +15,13 @@ public class Button implements Periodic {
     protected boolean isDown = false;
     protected boolean wasDown = false;
     protected ButtonState currentState = NONE;
-    protected ButtonState previousState = NONE;
 
     public Button(BooleanSupplier event) {
         this.event = event;
     }
 
     public enum ButtonState {
-        NONE, HELD, PRESSED, RELEASED, PRESSED_AND_RELEASED
+        NONE, HELD, PRESSED, RELEASED
     }
 
     @Override
@@ -36,13 +35,9 @@ public class Button implements Periodic {
             currentState = PRESSED;
         } else if (wasDown) {
             currentState = RELEASED;
-        } else if (previousState == PRESSED && currentState == RELEASED) {
-            currentState = PRESSED_AND_RELEASED;
         } else {
             currentState = NONE;
         }
-
-        previousState = currentState;
     }
 
     public void scheduleIf(Cmd cmd, BooleanSupplier event) {
@@ -73,32 +68,8 @@ public class Button implements Periodic {
         scheduleIf(cmd, released());
     }
 
-    public BooleanSupplier pressedAndReleased() {
-        return () -> currentState == PRESSED_AND_RELEASED;
-    }
-
-    public void pressedAndReleased(Cmd cmd) {
-        scheduleIf(cmd, pressedAndReleased());
-    }
-
     protected void setEvent(BooleanSupplier event) {
         this.event = event;
-    }
-
-    public ButtonState getCurrentState() {
-        return currentState;
-    }
-
-    public ButtonState getPreviousState() {
-        return previousState;
-    }
-
-    public boolean isDown() {
-        return isDown;
-    }
-
-    public boolean isWasDown() {
-        return wasDown;
     }
 
     // TODO implement debouncer

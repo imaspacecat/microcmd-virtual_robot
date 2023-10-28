@@ -6,6 +6,7 @@ import org.firstinspires.ftc.teamcode.microcmd.Periodic;
 import org.firstinspires.ftc.teamcode.microcmd.Scheduler;
 import org.firstinspires.ftc.teamcode.microcmd.example.BindCmd;
 
+import java.util.Arrays;
 import java.util.function.BooleanSupplier;
 import java.util.stream.Stream;
 
@@ -32,8 +33,6 @@ public class GamepadEx implements Periodic {
 
         leftStickButton = new Button(() -> gamepad.left_stick_button);
         rightStickButton = new Button(() -> gamepad.right_stick_button);
-
-//        leftTrigger = new Button(() -> gamepad.left_trigger >= 0.5);
 
         leftTrigger = new Trigger(() -> gamepad.left_trigger);
         rightTrigger = new Trigger(() -> gamepad.left_trigger);
