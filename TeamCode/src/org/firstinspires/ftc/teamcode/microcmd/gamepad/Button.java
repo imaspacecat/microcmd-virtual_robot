@@ -40,16 +40,12 @@ public class Button implements Periodic {
         }
     }
 
-    public void scheduleIf(Cmd cmd, BooleanSupplier event) {
-        Scheduler.schedule(new BindCmd(cmd, event, () -> false));
-    }
-
     public BooleanSupplier held() {
         return () -> currentState == HELD;
     }
 
     public void held(Cmd cmd) {
-        scheduleIf(cmd, held());
+        Scheduler.schedule(new BindCmd(cmd, held(), () -> false));
     }
 
     public BooleanSupplier pressed() {
@@ -57,7 +53,7 @@ public class Button implements Periodic {
     }
 
     public void pressed(Cmd cmd) {
-        scheduleIf(cmd, pressed());
+        Scheduler.schedule(new BindCmd(cmd, pressed(), () -> false));
     }
 
     public BooleanSupplier released() {
@@ -65,7 +61,7 @@ public class Button implements Periodic {
     }
 
     public void released(Cmd cmd) {
-        scheduleIf(cmd, released());
+        Scheduler.schedule(new BindCmd(cmd, released(), () -> false));
     }
 
     protected void setEvent(BooleanSupplier event) {
