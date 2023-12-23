@@ -1,18 +1,15 @@
-package org.firstinspires.ftc.teamcode.microcmd;
+package org.firstinspires.ftc.teamcode.microcmd.cmd;
 
-import java.util.Arrays;
-import java.util.List;
-
-public class SequentialCmd extends Cmd {
+public class SequentialCmd extends GroupCmd {
     private int index = 0;
-    private final List<Cmd> cmds;
 
     public SequentialCmd(Cmd... cmds) {
-        this.cmds = Arrays.asList(cmds);
+        super(cmds);
     }
 
     @Override
     public void init() {
+        index = 0;
         cmds.get(0).init();
     }
 

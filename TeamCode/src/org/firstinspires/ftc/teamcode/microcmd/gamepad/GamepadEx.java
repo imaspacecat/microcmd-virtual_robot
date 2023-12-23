@@ -1,12 +1,11 @@
 package org.firstinspires.ftc.teamcode.microcmd.gamepad;
 
 import com.qualcomm.robotcore.hardware.Gamepad;
-import org.firstinspires.ftc.teamcode.microcmd.Cmd;
 import org.firstinspires.ftc.teamcode.microcmd.Periodic;
 import org.firstinspires.ftc.teamcode.microcmd.Scheduler;
+import org.firstinspires.ftc.teamcode.microcmd.cmd.Cmd;
 import org.firstinspires.ftc.teamcode.microcmd.example.BindCmd;
 
-import java.util.Arrays;
 import java.util.function.BooleanSupplier;
 import java.util.stream.Stream;
 
@@ -45,10 +44,26 @@ public class GamepadEx implements Periodic {
 
     }
 
+    public double getLeftStickX() {
+        return leftStick.x.get();
+    }
+
+    public double getLeftStickY() {
+        return leftStick.y.get();
+    }
+
+    public double getRightStickX() {
+        return rightStick.x.get();
+    }
+
+    public double getRightStickY() {
+        return rightStick.y.get();
+    }
+
     // TODO test multiple
     public void multiple(Cmd cmd, BooleanSupplier... events) {
         BooleanSupplier allEvents = () -> Stream.of(events).allMatch(BooleanSupplier::getAsBoolean);
-        Scheduler.schedule(new BindCmd(cmd, allEvents, () -> false));
+        Scheduler.getInstance().schedule(new BindCmd(cmd, allEvents, () -> false));
     }
 
     @Override

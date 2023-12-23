@@ -21,11 +21,23 @@ public class Stick {
         y.flip();
     }
 
-    public double getX() {
-        return x.get();
-    }
+    public static class Axis {
+        private DoubleSupplier value;
 
-    public double getY() {
-        return x.get();
+        public Axis(DoubleSupplier value) {
+            this.value = value;
+        }
+
+        public void flip() {
+            value = () -> -value.getAsDouble();
+        }
+
+        public void setDeadzone(double radius) {
+            value = () -> Math.abs(value.getAsDouble()) < radius ? 0 : value.getAsDouble();
+        }
+
+        public double get() {
+            return value.getAsDouble();
+        }
     }
 }

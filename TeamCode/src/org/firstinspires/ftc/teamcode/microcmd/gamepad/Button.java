@@ -1,9 +1,9 @@
 package org.firstinspires.ftc.teamcode.microcmd.gamepad;
 
-import org.firstinspires.ftc.teamcode.microcmd.Cmd;
+import org.firstinspires.ftc.teamcode.microcmd.cmd.BindCmd;
+import org.firstinspires.ftc.teamcode.microcmd.cmd.Cmd;
 import org.firstinspires.ftc.teamcode.microcmd.Periodic;
 import org.firstinspires.ftc.teamcode.microcmd.Scheduler;
-import org.firstinspires.ftc.teamcode.microcmd.example.BindCmd;
 
 import java.util.function.BooleanSupplier;
 
@@ -45,7 +45,7 @@ public class Button implements Periodic {
     }
 
     public void held(Cmd cmd) {
-        Scheduler.schedule(new BindCmd(cmd, held(), () -> false));
+        Scheduler.getInstance().schedule(new BindCmd(cmd, held(), () -> false));
     }
 
     public BooleanSupplier pressed() {
@@ -53,7 +53,7 @@ public class Button implements Periodic {
     }
 
     public void pressed(Cmd cmd) {
-        Scheduler.schedule(new BindCmd(cmd, pressed(), () -> false));
+        Scheduler.getInstance().schedule(new BindCmd(cmd, pressed(), () -> false));
     }
 
     public BooleanSupplier released() {
@@ -61,7 +61,7 @@ public class Button implements Periodic {
     }
 
     public void released(Cmd cmd) {
-        Scheduler.schedule(new BindCmd(cmd, released(), () -> false));
+        Scheduler.getInstance().schedule(new BindCmd(cmd, released(), () -> false));
     }
 
     protected void setEvent(BooleanSupplier event) {

@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.microcmd;
+package org.firstinspires.ftc.teamcode.microcmd.cmd;
 
 import java.util.function.BooleanSupplier;
 

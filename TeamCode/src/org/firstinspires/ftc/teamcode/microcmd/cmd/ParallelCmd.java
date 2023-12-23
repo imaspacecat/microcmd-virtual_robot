@@ -1,15 +1,8 @@
-package org.firstinspires.ftc.teamcode.microcmd.example;
+package org.firstinspires.ftc.teamcode.microcmd.cmd;
 
-import org.firstinspires.ftc.teamcode.microcmd.Cmd;
-
-import java.util.Arrays;
-import java.util.List;
-
-public class ParallelCmd extends Cmd {
-    private final List<Cmd> cmds;
-
+public class ParallelCmd extends GroupCmd {
     public ParallelCmd(Cmd... cmds) {
-        this.cmds = Arrays.asList(cmds);
+        super(cmds);
     }
 
     @Override
@@ -29,6 +22,6 @@ public class ParallelCmd extends Cmd {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return cmds.stream().allMatch(Cmd::isFinished);
     }
 }
