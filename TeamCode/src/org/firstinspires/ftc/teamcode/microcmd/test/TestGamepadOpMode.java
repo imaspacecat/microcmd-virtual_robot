@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.microcmd.opmode.test;
+package org.firstinspires.ftc.teamcode.microcmd.test;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;

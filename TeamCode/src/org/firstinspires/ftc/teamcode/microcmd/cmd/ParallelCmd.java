@@ -11,8 +11,8 @@ public class ParallelCmd extends GroupCmd {
     }
 
     @Override
-    public void run() {
-        cmds.forEach(Cmd::run);
+    public void loop() {
+        cmds.forEach(Cmd::loop);
     }
 
     @Override

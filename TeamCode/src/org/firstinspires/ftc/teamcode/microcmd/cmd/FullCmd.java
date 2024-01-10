@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.microcmd.cmd;
 
+import org.firstinspires.ftc.teamcode.microcmd.subsystem.Subsystem;
+
 import java.util.function.BooleanSupplier;
 
 public class FullCmd extends Cmd {
@@ -8,16 +10,12 @@ public class FullCmd extends Cmd {
     private final Runnable terminate;
     private final BooleanSupplier isFinished;
 
-    public FullCmd(Runnable init, Runnable run, Runnable terminate, BooleanSupplier isFinished, String group) {
-        super(group);
+    public FullCmd(Runnable init, Runnable run, Runnable terminate, BooleanSupplier isFinished, Subsystem... subsystems) {
+        super(subsystems);
         this.init = init;
         this.run = run;
         this.terminate = terminate;
         this.isFinished = isFinished;
-    }
-
-    public FullCmd(Runnable init, Runnable run, Runnable terminate, BooleanSupplier isFinished) {
-        this(init, run, terminate, isFinished, null);
     }
 
     @Override
@@ -26,7 +24,7 @@ public class FullCmd extends Cmd {
     }
 
     @Override
-    public void run() {
+    public void loop() {
         run.run();
     }
 

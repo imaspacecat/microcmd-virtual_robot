@@ -5,6 +5,7 @@ import org.firstinspires.ftc.teamcode.microcmd.Periodic;
 import org.firstinspires.ftc.teamcode.microcmd.Scheduler;
 import org.firstinspires.ftc.teamcode.microcmd.cmd.Cmd;
 import org.firstinspires.ftc.teamcode.microcmd.gamepad.GamepadEx;
+import org.firstinspires.ftc.teamcode.microcmd.subsystem.Subsystem;
 
 public abstract class OpModeEx extends OpMode implements Periodic {
     protected GamepadEx gamepadEx1;
@@ -32,5 +33,11 @@ public abstract class OpModeEx extends OpMode implements Periodic {
 
     public void schedule(Cmd cmd) {
         Scheduler.getInstance().schedule(cmd);
+    }
+
+    public void register(Subsystem... subsystems) {
+        for (Subsystem subsystem : subsystems) {
+            schedule(subsystem.getDefaultCmd());
+        }
     }
 }

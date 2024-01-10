@@ -15,10 +15,7 @@ public class BindCmd extends Cmd {
     }
 
     @Override
-    public void init() {}
-
-    @Override
-    public void run() {
+    public void loop() {
         if (event.getAsBoolean()) {
             Scheduler.getInstance().schedule(cmd);
         }

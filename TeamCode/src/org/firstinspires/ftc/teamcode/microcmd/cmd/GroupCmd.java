@@ -6,10 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class GroupCmd extends Cmd {
-    protected final List<Cmd> cmds;
+    protected final List<Cmd> cmds = new ArrayList<>();
 
     protected GroupCmd(Cmd... cmds) {
-        this.cmds = new ArrayList<>(Arrays.asList(cmds));
+        addCmds(cmds);
     }
 
     public void addCmds(Cmd... cmds) {

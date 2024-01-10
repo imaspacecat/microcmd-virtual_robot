@@ -21,7 +21,4 @@ public class Trigger extends Button {
     public DoubleSupplier getValue() {
         return value;
     }
-
-    // TODO implement hysteresis https://en.wikipedia.org/wiki/Hysteresis
-
 }

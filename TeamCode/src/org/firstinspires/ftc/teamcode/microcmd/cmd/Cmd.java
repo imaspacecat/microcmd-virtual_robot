@@ -1,30 +1,28 @@
 package org.firstinspires.ftc.teamcode.microcmd.cmd;
 
+import org.firstinspires.ftc.teamcode.microcmd.subsystem.Subsystem;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.BooleanSupplier;
 
 public abstract class Cmd {
-    private final String group;
+    private final List<Subsystem> subsystems;
 
-    public Cmd(String group) {
-        this.group = group;
+    public Cmd(Subsystem... subsystems) {
+        this.subsystems = Arrays.asList(subsystems);
     }
 
-    public Cmd() {
-        this(null);
-    }
+    public void init() {}
 
-    public abstract void init();
+    public void loop() {}
 
-    public void run() {
-    }
-
-    public void terminate() {
-    }
+    public void terminate() {}
 
     public abstract boolean isFinished();
 
-    public String getGroup() {
-        return group;
+    public List<Subsystem> getSubsystems() {
+        return subsystems;
     }
 
     public Cmd with(Cmd... cmds) {
@@ -45,8 +43,8 @@ public abstract class Cmd {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "group='" + group + '\'' +
+        return getClass().getSimpleName()+"{" +
+                "subsystems=" + subsystems +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.microcmd;
 
 import org.firstinspires.ftc.teamcode.microcmd.cmd.Cmd;
 
+import java.util.Collections;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -16,10 +17,10 @@ public class Scheduler implements Periodic {
     }
 
     public void schedule(Cmd cmd) {
-        for (Cmd lCmd : cmds) {
-            if (cmd.getGroup() != null && cmd.getGroup().equals(lCmd.getGroup())) {
-                lCmd.terminate();
-                cmds.remove(lCmd);
+        for (Cmd scheduledCmd : cmds) {
+            if (!cmd.getSubsystems().isEmpty() && !Collections.disjoint(cmd.getSubsystems(), scheduledCmd.getSubsystems())) {
+                scheduledCmd.terminate();
+                cmds.remove(scheduledCmd);
             }
         }
 
@@ -36,7 +37,11 @@ public class Scheduler implements Periodic {
             }
         }
 
-        cmds.forEach(Cmd::run);
+        cmds.forEach(Cmd::loop);
+    }
+
+    public void clear() {
+        cmds.clear();
     }
 
     public Queue<Cmd> getCmds() {

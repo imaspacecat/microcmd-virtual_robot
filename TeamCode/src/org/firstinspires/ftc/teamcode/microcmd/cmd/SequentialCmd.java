@@ -14,12 +14,12 @@ public class SequentialCmd extends GroupCmd {
     }
 
     @Override
-    public void run() {
+    public void loop() {
         if (cmds.get(index).isFinished()) {
             cmds.get(index).terminate();
             cmds.get(++index).init();
         } else {
-            cmds.get(index).run();
+            cmds.get(index).loop();
         }
     }
 
@@ -30,7 +30,6 @@ public class SequentialCmd extends GroupCmd {
 
     @Override
     public boolean isFinished() {
-        // TODO verify that the second condition is necessary
         return cmds.get(cmds.size() - 1).isFinished() && index == cmds.size() - 1;
     }
 }
