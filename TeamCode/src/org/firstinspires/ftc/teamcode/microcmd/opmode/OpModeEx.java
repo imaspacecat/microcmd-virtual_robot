@@ -13,12 +13,10 @@ import java.util.List;
 public abstract class OpModeEx extends OpMode implements Periodic {
     protected GamepadEx gamepadEx1;
     protected GamepadEx gamepadEx2;
-    protected List<Cmd> defaultCmds;
     @Override
     public void init() {
         gamepadEx1 = new GamepadEx(gamepad1);
         gamepadEx2 = new GamepadEx(gamepad2);
-        defaultCmds = new ArrayList<>();
         initialize();
     }
 
