@@ -30,6 +30,26 @@ public class Scheduler implements Periodic {
         }
     }
 
+    public boolean isScheduled(Cmd... cmds) {
+        for (Cmd cmd : cmds) {
+            for (Cmd scheduledCmd : this.cmds) {
+                if (scheduledCmd == cmd) return true;
+            }
+        }
+        return false;
+    }
+
+    public void cancel(Cmd... cmds) {
+        for (Cmd cmd : cmds) {
+            for (Cmd scheduledCmd : this.cmds) {
+                if (scheduledCmd == cmd) {
+                    scheduledCmd.terminate();
+                    this.cmds.remove(scheduledCmd);
+                }
+            }
+        }
+    }
+
     @Override
     public void update() {
         for (Cmd cmd : cmds) {
