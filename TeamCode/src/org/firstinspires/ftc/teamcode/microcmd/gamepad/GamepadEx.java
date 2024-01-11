@@ -16,11 +16,6 @@ public class GamepadEx implements Periodic {
     public Stick leftStick, rightStick;
     private final Button[] buttons;
 
-    public enum NUMBER {
-        ONE,
-        TWO
-    }
-
     public GamepadEx(Gamepad gamepad) {
         a = new Button(() -> gamepad.a);
         b = new Button(() -> gamepad.b);
@@ -68,40 +63,6 @@ public class GamepadEx implements Periodic {
     public void multiple(Cmd cmd, BooleanSupplier... events) {
         BooleanSupplier allEvents = () -> Stream.of(events).allMatch(BooleanSupplier::getAsBoolean);
         Scheduler.getInstance().schedule(new BindCmd(cmd, allEvents, () -> false));
-    }
-
-    public Button fromKey(Button.Key key) {
-        switch (key) {
-            case A:
-                return a;
-            case B:
-                return b;
-            case X:
-                return x;
-            case Y:
-                return y;
-            case LEFT_BUMPER:
-                return leftBumper;
-            case RIGHT_BUMPER:
-                return rightBumper;
-            case DPAD_UP:
-                return dpadUp;
-            case DPAD_DOWN:
-                return dpadDown;
-            case DPAD_LEFT:
-                return dpadLeft;
-            case DPAD_RIGHT:
-                return dpadRight;
-            case LEFT_STICK_BUTTON:
-                return leftStickButton;
-            case RIGHT_STICK_BUTTON:
-                return rightStickButton;
-            case LEFT_TRIGGER:
-                return leftTrigger;
-            case RIGHT_TRIGGER:
-                return rightTrigger;
-        }
-        return null;
     }
 
     @Override
