@@ -10,7 +10,6 @@ import org.firstinspires.ftc.teamcode.microcmd.subsystem.Subsystem;
 public abstract class OpModeEx extends OpMode implements Periodic {
     protected GamepadEx gamepadEx1;
     protected GamepadEx gamepadEx2;
-
     @Override
     public void init() {
         gamepadEx1 = new GamepadEx(gamepad1);
@@ -37,7 +36,7 @@ public abstract class OpModeEx extends OpMode implements Periodic {
 
     public void register(Subsystem... subsystems) {
         for (Subsystem subsystem : subsystems) {
-            schedule(subsystem.getDefaultCmd());
+            if (subsystem.getDefaultCmd() != null) schedule(subsystem.getDefaultCmd());
         }
     }
 }
