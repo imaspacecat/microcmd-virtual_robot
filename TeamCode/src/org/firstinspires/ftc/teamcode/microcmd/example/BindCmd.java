@@ -9,9 +9,7 @@ import java.util.function.BooleanSupplier;
 public class BindCmd extends FullCmd {
     public BindCmd(Cmd cmd, BooleanSupplier event, BooleanSupplier isFinished) {
         super(() -> {}, () -> {
-                    if (event.getAsBoolean()) {
-                        Scheduler.getInstance().schedule(cmd);
-                    }
+                    if (event.getAsBoolean()) Scheduler.getInstance().schedule(cmd);
                 }, () -> {}, isFinished
         );
     }
