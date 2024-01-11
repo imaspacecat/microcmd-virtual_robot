@@ -7,9 +7,6 @@ import org.firstinspires.ftc.teamcode.microcmd.cmd.Cmd;
 import org.firstinspires.ftc.teamcode.microcmd.gamepad.GamepadEx;
 import org.firstinspires.ftc.teamcode.microcmd.subsystem.Subsystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class OpModeEx extends OpMode implements Periodic {
     protected GamepadEx gamepadEx1;
     protected GamepadEx gamepadEx2;
